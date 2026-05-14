@@ -6,13 +6,12 @@ plugins {
 repositories {
     mavenCentral()
 }
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.31.0'
+    testImplementation 'org.testng:testng:7.11.0'
 }
-
-application {
-    mainClass = 'org.example.Main'
+test{
+    useTestNG()
 }
 tasks.register('prepareDocs', Copy) {
     description = 'Copies HTML, CSS, and images to the docs folder.'
@@ -23,4 +22,11 @@ tasks.register('prepareDocs', Copy) {
     }
     into("$rootDir/docs")
 }
-
+application {
+    mainClass = 'org.example.Main'
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.example.Main'
+    }
+}
